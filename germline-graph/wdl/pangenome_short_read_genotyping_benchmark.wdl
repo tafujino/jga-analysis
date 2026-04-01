@@ -2,7 +2,7 @@ version 1.0
 
 import "pangenome_short_read_genotyping.wdl" as genotyping
 import "happy.wdl"
-import "truvari.wdl"
+import "sv_benchmark.wdl"
 
 workflow PangenomeShortReadGenotypingBenchmark {
   meta {
@@ -86,7 +86,7 @@ workflow PangenomeShortReadGenotypingBenchmark {
   }
 
   if (evaluate_sv) {
-    call truvari.Bench {
+    call sv_benchmark.SvBenchmark {
       input:
       comp_vcf_gz = Gt.vg_call_vcf_gz,
       comp_vcf_gz_tbi = Gt.vg_call_vcf_gz_tbi,
@@ -105,8 +105,8 @@ workflow PangenomeShortReadGenotypingBenchmark {
     File vg_call_vcf_gz = Gt.vg_call_vcf_gz
     File vg_call_vcf_gz_tbi = Gt.vg_call_vcf_gz_tbi
     File happy_summary = Happy.summary
-    File? truvari_summary = Bench.summary
-    File? truvari_refine_region_summary = Bench.refine_region_summary
-    File? truvari_refine_variant_summary = Bench.refine_variant_summary
+    File? truvari_summary = SvBenchmark.summary
+    File? truvari_refine_region_summary = SvBenchmark.refine_region_summary
+    File? truvari_refine_variant_summary = SvBenchmark.refine_variant_summary
   }
 }
