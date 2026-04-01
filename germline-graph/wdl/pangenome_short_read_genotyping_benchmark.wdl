@@ -41,7 +41,8 @@ workflow PangenomeShortReadGenotypingBenchmark {
     File? hapl
     Boolean genotype_snarls = false
     Boolean all_snarls = false
-    Boolean call_sampled_genotypes = true
+    Boolean original_gbz = false
+    Boolean sampled_genotypes = true
     File? snarls
     Int? min_snarl_length
     Int? max_snarl_length
@@ -66,7 +67,8 @@ workflow PangenomeShortReadGenotypingBenchmark {
     hapl = hapl,
     genotype_snarls = genotype_snarls,
     all_snarls = all_snarls,
-    call_sampled_genotypes = call_sampled_genotypes,
+    original_gbz = original_gbz,
+    sampled_genotypes = sampled_genotypes,
     snarls = snarls,
     min_snarl_length = min_snarl_length,
     max_snarl_length = max_snarl_length
