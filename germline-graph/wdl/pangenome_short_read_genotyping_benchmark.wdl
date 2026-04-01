@@ -86,13 +86,13 @@ workflow PangenomeShortReadGenotypingBenchmark {
   }
 
   if (evaluate_sv) {
-    call truvari.TruvariBench {
+    call truvari.Bench {
       input:
-      comparison_vcf_gz = Gt.vg_call_vcf_gz,
-      comparison_vcf_gz_tbi = Gt.vg_call_vcf_gz_tbi,
-      baseline_vcf_gz = select_first([sv_benchmark_vcf_gz]),
-      baseline_vcf_gz_tbi = select_first([sv_benchmark_vcf_gz_tbi]),
-      baseline_bed = select_first([sv_benchmark_bed]),
+      comp_vcf_gz = Gt.vg_call_vcf_gz,
+      comp_vcf_gz_tbi = Gt.vg_call_vcf_gz_tbi,
+      base_vcf_gz = select_first([sv_benchmark_vcf_gz]),
+      base_vcf_gz_tbi = select_first([sv_benchmark_vcf_gz_tbi]),
+      base_bed = select_first([sv_benchmark_bed]),
       ref_fa = ref_fa
     }
   }
@@ -105,6 +105,8 @@ workflow PangenomeShortReadGenotypingBenchmark {
     File vg_call_vcf_gz = Gt.vg_call_vcf_gz
     File vg_call_vcf_gz_tbi = Gt.vg_call_vcf_gz_tbi
     File happy_summary = Happy.summary
-    File? truvari_summary = TruvariBench.summary
+    File? truvari_summary = Bench.summary
+    File? truvari_refine_region_summary = Bench.refine_region_summary
+    File? truvari_refine_variant_summary = Bench.refine_variant_summary
   }
 }
